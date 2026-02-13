@@ -1,0 +1,247 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// LOADING SCREEN
+//
+// ------------------------------+
+
+$loading_font_size: calc($title_font_size * 2.5);
+
+// Main container
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z_loading;
+  overflow: hidden;
+
+  .content {
+    width: 200px;
+    height: 150px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .kanji {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        font-size: $loading_font_size;
+        line-height: 1;
+      }
+    }
+
+    .progress_container {
+      position: absolute;
+      bottom: -#{$margin};
+      width: 200px;
+      height: $border_width_big;
+      background-color: rgba($white_color, $less_less_opacity);
+      border-radius: $small_border_radius;
+      overflow: hidden;
+
+      .progress_bar {
+        height: 100%;
+        background-color: $white_color;
+        transition: width $transition_time;
+        border-radius: $small_border_radius;
+      }
+    }
+  }
+}
+
+// ==============================
+// BACKGROUND PANELS
+// ==============================
+
+// Side bands thickness
+$band_size: 30%;
+// Center band thickness (smaller because it touches corners)
+$middle_size: 20%;
+// Overlap to prevent gaps between panels
+$overlap: $border_width;
+
+.panels {
+  position: absolute;
+  inset: 0;
+
+  .panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: $black_color;
+  }
+
+  // Bottom-left triangle
+  .triangle_bottom_left {
+    clip-path: polygon(
+      0% calc($middle_size + $band_size - $overlap),
+      0% 100%,
+      calc(100% - $middle_size - $band_size + $overlap) 100%
+    );
+  }
+
+  // Left band (parallelogram)
+  .rect_left {
+    clip-path: polygon(
+      0% calc($middle_size - $overlap),
+      0% calc($middle_size + $band_size + $overlap),
+      calc(100% - $middle_size - $band_size - $overlap) 100%,
+      calc(100% - $middle_size + $overlap) 100%
+    );
+  }
+
+  // Center band (hexagon - passes through corners)
+  .rect_middle {
+    clip-path: polygon(
+      0% 0%,
+      calc($middle_size + $overlap) 0%,
+      100% calc(100% - $middle_size - $overlap),
+      100% 100%,
+      calc(100% - $middle_size - $overlap) 100%,
+      0% calc($middle_size + $overlap)
+    );
+  }
+
+  // Right band (parallelogram)
+  .rect_right {
+    clip-path: polygon(
+      calc($middle_size - $overlap) 0%,
+      calc($middle_size + $band_size + $overlap) 0%,
+      100% calc(100% - $middle_size - $band_size - $overlap),
+      100% calc(100% - $middle_size + $overlap)
+    );
+  }
+
+  // Top-right triangle
+  .triangle_top_right {
+    clip-path: polygon(
+      calc($middle_size + $band_size - $overlap) 0%,
+      100% 0%,
+      100% calc(100% - $middle_size - $band_size + $overlap)
+    );
+  }
+}
+
+// ==============================
+// DECORATIVE BORDER LINES
+// ==============================
+
+.border_lines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  .line_svg {
+    width: 100%;
+    height: 100%;
+
+    line {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+// ==============================
+// EXIT ANIMATIONS
+// ==============================
+
+// Duration of the slash lines animation
+$slash_duration: 0.6s;
+// Duration of each panel slide
+$panel_duration: 0.4s;
+// Delay before the first panel starts moving
+$panel_base_delay: 0.4s;
+// Delay between each panel
+$panel_stagger: 0.1s;
+// Slide distance for panels
+$slide_distance: 150%;
+
+// Content fade
+.exiting {
+  .content {
+    opacity: 0;
+    transition: opacity $transition_time ease-out;
+  }
+
+  // Slash animation on lines
+  .border_lines {
+    .line_svg line {
+      animation: slashGlow $slash_duration ease-out forwards;
+
+      &:nth-child(2) {
+        animation-delay: 0.05s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.1s;
+      }
+      &:nth-child(4) {
+        animation-delay: 0.15s;
+      }
+    }
+  }
+
+  // Panel slide animations
+  .panels {
+    // 1. Violet (rect_right) - slides down-right
+    .rect_right {
+      animation: slideDownRight $panel_duration ease-in forwards;
+      animation-delay: $panel_base_delay;
+    }
+
+    // 2. Blue (triangle_top_right) - slides down-right
+    .triangle_top_right {
+      animation: slideDownRight $panel_duration ease-in forwards;
+      animation-delay: calc($panel_base_delay + $panel_stagger);
+    }
+
+    // 3. Red (rect_left) - slides down-right
+    .rect_left {
+      animation: slideDownRight $panel_duration ease-in forwards;
+      animation-delay: calc($panel_base_delay + $panel_stagger * 2);
+    }
+
+    // 4. Yellow (triangle_bottom_left) - slides down-right
+    .triangle_bottom_left {
+      animation: slideDownRight $panel_duration ease-in forwards;
+      animation-delay: calc($panel_base_delay + $panel_stagger * 3);
+    }
+
+    // 5. Green (rect_middle) - slides down-right
+    .rect_middle {
+      animation: slideDownRight $panel_duration ease-in forwards;
+      animation-delay: calc($panel_base_delay + $panel_stagger * 4);
+    }
+  }
+}
+
+// Keyframes for slash glow effect
+@keyframes slashGlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -200;
+  }
+}
+
+// Slide animation
+@keyframes slideDownRight {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate($slide_distance, $slide_distance);
+  }
+}

@@ -1,0 +1,146 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// BACKGROUND KANJI
+//
+// ------------------------------+
+
+// Kanji config
+$kanji_font_size: calc($title_font_size * 8);
+$kanji_offset_x: 60px;
+$kanji_offset_y: 60px;
+
+$kanji_font_size_mob: calc($title_font_size * 2);
+$kanji_offset_x_mob: 20px;
+$kanji_offset_y_mob: 20px;
+
+// Shared kanji styles
+%kanji_base {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $first_font;
+  font-size: $kanji_font_size;
+  font-weight: $font_weight_bold;
+  line-height: 1;
+  user-select: none;
+
+  span {
+    display: block;
+  }
+
+  @media only screen and (max-width: $mobile) {
+    left: 10%;
+    font-size: $kanji_font_size_mob;
+  }
+}
+
+// Container
+.container {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  // Appearance animation - fade in
+  opacity: 0;
+  animation: kanjiAppear $text_animation ease-out forwards;
+
+  @media only screen and (max-width: $mobile) {
+    left: 10%;
+  }
+
+  // Colored kanji - background layer
+  .colored_kanji {
+    @extend %kanji_base;
+    position: absolute;
+    z-index: 0;
+    color: var(--color-secondary);
+    opacity: $less_less_opacity;
+    transform: translate(-$kanji_offset_x, $kanji_offset_y);
+    transition: color $transition_time;
+
+    // Layer separation
+    animation: kanjiColoredSeparate $text_animation ease-out forwards;
+
+    @media only screen and (max-width: $mobile) {
+      transform: translate(-$kanji_offset_x_mob, $kanji_offset_y_mob);
+      animation: kanjiColoredSeparateMob $text_animation ease-out forwards;
+    }
+  }
+
+  // Main kanji - foreground layer
+  .main_kanji {
+    position: relative;
+    @extend %kanji_base;
+    z-index: 1;
+    color: $white_color;
+    opacity: $less_opacity;
+    transform: translate($kanji_offset_x, -$kanji_offset_y);
+
+    // Layer separation
+    animation: kanjiMainSeparate $text_animation ease-out forwards;
+
+    @media only screen and (max-width: $mobile) {
+      transform: translate($kanji_offset_x_mob, -$kanji_offset_y_mob);
+      animation: kanjiMainSeparateMob $text_animation ease-out forwards;
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+
+@keyframes kanjiAppear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Colored kanji: starts centered, separates to offset
+@keyframes kanjiColoredSeparate {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-$kanji_offset_x, $kanji_offset_y);
+  }
+}
+
+@keyframes kanjiColoredSeparateMob {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-$kanji_offset_x_mob, $kanji_offset_y_mob);
+  }
+}
+
+// Main kanji: starts centered, separates to offset
+@keyframes kanjiMainSeparate {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate($kanji_offset_x, -$kanji_offset_y);
+  }
+}
+
+@keyframes kanjiMainSeparateMob {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate($kanji_offset_x_mob, -$kanji_offset_y_mob);
+  }
+}

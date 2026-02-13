@@ -1,0 +1,93 @@
+// ===== COLORS =====
+
+$black_color: #040b12;
+$white_color: #f8f8ff;
+
+// ===== BORDER =====
+
+$small_border_radius: 4px;
+$border_radius: 10px;
+$circle_border_radius: 50%;
+$border_width: 1px;
+$border_width_big: 2px;
+
+// ===== FONTS =====
+
+$first_font: 'Nunito', sans-serif;
+$font_weight_bold: 600;
+$font_weight_regular: normal;
+
+// ===== FONT SIZE =====
+
+$small_small_small_font_size: 10px;
+$small_small_font_size: 12px;
+$small_font_size: 14px;
+$font_size: 16px;
+$medium_font_size: 18px;
+$big_font_size: 24px;
+$title_font_size: 32px;
+
+// ===== TEXT =====
+
+$text_indent: 20px;
+$letter_spacing: normal;
+$line_height: normal;
+
+// ===== ANIMATIONS =====
+
+$transition: 0.6s all;
+$transition_time: 0.6s;
+$text_animation: 1s;
+$text_animation_margin: 26px;
+$text_animation_negative_margin: -26px;
+
+// ===== MARGIN =====
+
+$small_small_margin: 5px;
+$small_margin: 10px;
+$margin: 20px;
+$big_margin: 40px;
+$layout_margin: 20px;
+$layout_margin_mob: 10px;
+
+// ===== HEADER / FOOTER =====
+
+$header_footer_height: $small_margin;
+$footer_width: calc($margin + $small_margin) * 2;
+$header_width: $footer_width * 2;
+
+$header_footer_height_mob: $small_small_margin;
+$footer_width_mob: calc($small_margin + $small_small_margin) * 2;
+$header_width_mob: $footer_width_mob * 2;
+
+// ===== OPACITY =====
+
+$less_opacity: 0.6;
+$less_less_opacity: 0.4;
+
+// ===== BREAKPOINTS =====
+
+$mobile: 1000px;
+
+// ===== Z-INDEX =====
+
+$z_canvas: 1;
+$z_content: 10;
+$z_ui: 100;
+$z_loading: 500;
+$z_cursor: 1000;
+
+// ===== ORNAMENTS =====
+
+$ornament_size: 100px;
+$ornament_offset_x: 20px;
+$ornament_offset_y: 20px;
+
+$ornament_size_mob: 40px;
+$ornament_offset_x_mob: 5px;
+$ornament_offset_y_mob: 5px;
+
+// ===== SHADOW =====
+
+$shadow_blur: 10px;
+$shadow_box: 0 0px 10px 2px var(--color-primary);

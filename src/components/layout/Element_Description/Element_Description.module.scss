@@ -1,0 +1,273 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// ELEMENT DESCRIPTION
+//
+// ------------------------------+
+
+// Size Config
+$img_w_h: 150px;
+$img_c_w_h: 350px;
+
+$img_w_h_mob: 24px;
+$img_c_w_h_mob: 100px;
+
+$wipe_animation_delay : 0.02s;
+
+
+// Container - bottom right position
+.container {
+  position: absolute;
+  bottom: $layout_margin;
+  right: $layout_margin;
+  width: 30%;
+  height: auto;
+
+  @media (max-width: $mobile) {
+    bottom: $layout_margin_mob;
+    right: $layout_margin_mob;
+    width: 40%;
+  }
+
+  // Decorative Element
+  .grass_container {
+    position: absolute;
+    bottom: -#{calc($layout_margin + $small_small_margin)};
+
+    @media (max-width: $mobile) {
+      bottom: -#{calc($layout_margin_mob + $small_small_margin)};
+    }
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    opacity: $less_less_opacity;
+    z-index: 0;
+
+    // Appearance animation - slide up
+    animation: grassSlideUp $text_animation ease-out forwards;
+
+    .deco_img_colored {
+      width: $img_c_w_h;
+      height: $img_c_w_h;
+
+      @media (max-width: $mobile) {
+        width: $img_c_w_h_mob;
+        height: $img_c_w_h_mob;
+      }
+
+      path {
+        fill: var(--color-secondary);
+        transition: fill $transition_time;
+      }
+    }
+  }
+
+  // Header with Image
+  .header {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: -#{$img_w_h};
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    opacity: $less_opacity;
+
+    // Appearance animation - slide up
+    animation: headerSlideUp $text_animation ease-out forwards;
+
+    @media (max-width: $mobile) {
+      top: -#{$img_w_h_mob};
+    }
+
+    .deco_img {
+      width: $img_w_h;
+      height: $img_w_h;
+
+      @media (max-width: $mobile) {
+        width: $img_w_h_mob;
+        height: $img_w_h_mob;
+      }
+    }
+  }
+
+  // Text container
+  .text_cont {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    position: relative;
+
+    // Wipe-in wrapper for new text
+    .wipe_in {
+      width: 100%;
+      clip-path: inset(0 0 0 100%);
+      animation: textWipeIn $transition_time ease-in-out $wipe_animation_delay forwards;
+    }
+
+    p {
+      font-size: $medium_font_size;
+      text-align: justify;
+      z-index: 1;
+
+      // Appearance animation - fade from bottom-right diagonal
+      opacity: 0;
+      animation: fadeFromBottomRight $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        font-size: $small_small_small_font_size;
+      }
+    }
+
+    // Old text overlay - wipes away right-to-left
+    .text_exit {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      opacity: 1;
+      animation: textWipeOut $transition_time ease-in-out forwards;
+    }
+  }
+
+  // Ornament decoration container
+  .ornament_container {
+    position: absolute;
+    top: calc(-#{$ornament_size} + -#{$small_margin});
+    right: 0;
+    width: $ornament_size;
+    height: $ornament_size;
+
+    @media (max-width: $mobile) {
+      top: calc(-#{$ornament_size_mob} + -#{$small_margin});
+      width: $ornament_size_mob;
+      height: $ornament_size_mob;
+    }
+
+    // Colored ornament - background layer
+    .ornament_colored {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: var(--color-secondary);
+      opacity: $less_less_opacity;
+      transform: translate(-$ornament_offset_x, -$ornament_offset_y)
+        rotate(90deg);
+      transition: color $transition_time;
+
+      // Ornament layer separation
+      animation: descOrnamentSeparate $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+        transform: translate(-$ornament_offset_x_mob, -$ornament_offset_y_mob)
+          rotate(90deg);
+        animation: descOrnamentSeparateMob $text_animation ease-out forwards;
+      }
+    }
+
+    // White ornament - foreground layer
+    .ornament {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: $white_color;
+      opacity: $less_opacity;
+      transform: rotate(90deg);
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+      }
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+
+// Text fade from bottom-right diagonal
+@keyframes fadeFromBottomRight {
+  0% {
+    opacity: 0;
+    transform: translate($text_animation_margin, $text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+// Grass decoration slide up
+@keyframes grassSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY($text_animation_margin);
+  }
+  100% {
+    opacity: $less_less_opacity;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// Header decoration slide up
+@keyframes headerSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY($text_animation_margin);
+  }
+  100% {
+    opacity: $less_opacity;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// Ornament colored layer separation
+@keyframes descOrnamentSeparate {
+  0% {
+    transform: translate(0, 0) rotate(90deg);
+  }
+  100% {
+    transform: translate(-$ornament_offset_x, -$ornament_offset_y) rotate(90deg);
+  }
+}
+
+@keyframes descOrnamentSeparateMob {
+  0% {
+    transform: translate(0, 0) rotate(90deg);
+  }
+  100% {
+    transform: translate(-$ornament_offset_x_mob, -$ornament_offset_y_mob) rotate(90deg);
+  }
+}
+
+// New text wipe-in: reveal from right to left
+@keyframes textWipeIn {
+  0% {
+    clip-path: inset(0 0 0 100%);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+// Old text wipe-out: clip from right to left
+@keyframes textWipeOut {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}

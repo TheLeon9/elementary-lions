@@ -1,0 +1,36 @@
+{
+  "name": "elemental-lions",
+  "version": "1.0.0",
+  "description": "Immersive Awwwards-level single-page website featuring 7 elemental lions with Three.js effects",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "nextjs",
+    "threejs",
+    "react",
+    "elemental",
+    "lions"
+  ],
+  "author": "TheLeon",
+  "license": "MIT",
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@react-three/postprocessing": "^3.0.4",
+    "gsap": "^3.14.2",
+    "next": "^16.1.4",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sass": "^1.97.3",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "13.5.4"
+  }
+}

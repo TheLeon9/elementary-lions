@@ -1,0 +1,102 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// HEADER TEXT
+//
+// ------------------------------+
+
+// Container - centered at top with polygon
+.container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  // Appearance animation - slide from top
+  opacity: 0;
+  animation: slideFromTop $text_animation ease-out forwards;
+
+  // Polygon style
+  .polygon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $margin;
+    padding: $header_footer_height $header_width;
+
+    @media (max-width: $mobile) {
+      gap: $small_margin;
+      padding: $header_footer_height_mob $header_width_mob;
+    }
+
+    // Polygon effect
+    background: rgba($black_color, $less_opacity);
+    backdrop-filter: blur($shadow_blur);
+    clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
+
+    // Japanese text styling
+    h1 {
+      font-size: $title_font_size;
+      text-wrap: unset;
+
+      @media (max-width: $mobile) {
+        font-size: $small_small_font_size;
+      }
+    }
+
+    // Decorative lines
+    .line {
+      position: relative;
+      width: 80px;
+      height: $border_width;
+      background: $white_color;
+
+      @media (max-width: $mobile) {
+        width: 20px;
+      }
+
+      // Square decoration
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: $small_margin;
+        height: $small_margin;
+        background: $white_color;
+        transform: translateY(-50%) rotate(45deg);
+        // border-radius: $circle_border_radius;
+        // transform: translateY(-50%);
+
+        @media (max-width: $mobile) {
+          width: $small_small_margin;
+          height: $small_small_margin;
+        }
+      }
+
+      // Left line - square on right side (attached)
+      &.left::after {
+        right: 0px;
+      }
+
+      // Right line - square on left side (attached)
+      &.right::after {
+        left: 0px;
+      }
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+@keyframes slideFromTop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-$text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

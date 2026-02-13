@@ -1,0 +1,59 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// FOOTER ICON
+//
+// ------------------------------+
+
+// Size Config
+$img_size: 24px;
+$img_size_mob: 14px;
+
+// Container - centered at bottom with polygon
+.container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $header_footer_height $footer_width;
+
+  // Polygon effect
+  background: rgba($black_color, $less_opacity);
+  backdrop-filter: blur($shadow_blur);
+  clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+
+  // Appearance animation - slide from bottom
+  opacity: 0;
+  animation: slideFromBottom $text_animation ease-out forwards;
+
+  @media (max-width: $mobile) {
+    padding: $header_footer_height_mob $footer_width_mob;
+  }
+
+  img {
+    width: $img_size;
+    height: auto;
+
+    @media (max-width: $mobile) {
+      width: $img_size_mob;
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+@keyframes slideFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY($text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

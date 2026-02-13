@@ -1,0 +1,58 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// ZODIAC SYMBOL
+//
+// ------------------------------+
+
+// Zodiac config
+$zodiac_font_size: calc($title_font_size + $small_small_small_font_size);
+$zodiac_font_size_mob: $small_small_font_size;
+
+// Container
+.container {
+  position: fixed;
+  left: $big_margin;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: $z_content;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Appearance animation - slide from left
+  opacity: 0;
+  animation: slideFromLeft $text_animation ease-out forwards;
+
+  @media (max-width: $mobile) {
+    left: $small_margin;
+  }
+
+  // Symbol
+  .symbol {
+    font-size: $zodiac_font_size;
+    color: $white_color;
+    opacity: $less_opacity;
+    user-select: none;
+
+    @media (max-width: $mobile) {
+      font-size: $zodiac_font_size_mob;
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-$text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}

@@ -1,0 +1,173 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// ELEMENT SWITCHER
+//
+// ------------------------------+
+
+// Sizes
+$rosette_size: 50px;
+$dot_size: 20px;
+$element_size: 15px;
+
+$rosette_size_mob: 24px;
+$dot_size_mob: 6px;
+
+// Container - fixed on right side
+.container {
+  position: fixed;
+  right: $big_margin;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: $z_ui;
+  display: flex;
+  align-items: center;
+
+  // Appearance animation - slide from right
+  opacity: 0;
+  animation: slideFromRight $text_animation ease-out forwards;
+
+  @media (max-width: $mobile) {
+    right: $small_margin;
+  }
+
+  // Vertical line decoration
+  .line {
+    position: absolute;
+    right: calc($rosette_size / 2);
+    top: 0;
+    bottom: 0;
+    width: $border_width;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      $white_color 20%,
+      $white_color 80%,
+      transparent
+    );
+    opacity: $less_less_opacity;
+
+    @media (max-width: $mobile) {
+      right: calc($rosette_size_mob / 2);
+    }
+  }
+
+  // Main list
+  .list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: $small_margin;
+    padding: 0;
+    margin: 0;
+
+    @media (max-width: $mobile) {
+      gap: $small_small_margin;
+    }
+
+    // List item wrapper
+    .item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      // Button
+      .button {
+        width: $rosette_size;
+        height: $rosette_size;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: none;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: $mobile) {
+          width: $rosette_size_mob;
+          height: $rosette_size_mob;
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        // Rosette SVG
+        .rosette {
+          width: $rosette_size;
+          height: $rosette_size;
+          color: $white_color;
+          opacity: $less_opacity;
+          transition: opacity $transition_time;
+
+          @media (max-width: $mobile) {
+            width: $rosette_size_mob;
+            height: $rosette_size_mob;
+          }
+        }
+
+        // Center dot
+        .dot {
+          position: absolute;
+          width: $dot_size;
+          height: $dot_size;
+          border-radius: $circle_border_radius;
+          background: var(--element-color);
+
+          @media (max-width: $mobile) {
+            width: $dot_size_mob;
+            height: $dot_size_mob;
+          }
+        }
+
+        // Element icon
+        .icon {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: $element_size;
+          height: $element_size;
+          object-fit: contain;
+
+          @media (max-width: $mobile) {
+            display: none;
+          }
+        }
+
+        // Hover state
+        &:hover {
+          .rosette {
+            opacity: 1;
+            filter: drop-shadow(0 0 $shadow_blur var(--element-color));
+          }
+        }
+
+        // Active state
+        &.active {
+          .rosette {
+            opacity: 1;
+            filter: drop-shadow(0 0 $shadow_blur var(--element-color));
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) translateX($text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}

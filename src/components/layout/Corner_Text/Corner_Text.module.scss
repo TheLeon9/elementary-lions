@@ -1,0 +1,394 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// CORNER TEXT
+//
+// ------------------------------+
+
+// Base container
+.container {
+  position: absolute;
+  top: $layout_margin;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: $mobile) {
+    top: $layout_margin_mob;
+  }
+}
+
+// ----------------------------------------
+// Left position - Translations
+// ----------------------------------------
+
+// Element icon config
+$element_offset_x: 20px; // offset from ornament
+$element_offset_y: 60px; // offset from ornament
+$element_size: 100px;
+$element_offset: 10px;
+
+$element_offset_x_mob: 5px; // offset from ornament
+$element_offset_y_mob: 20px; // offset from ornament
+$element_size_mob: 20px;
+$element_offset_mob: 2px;
+
+.left {
+  left: $layout_margin;
+  flex-direction: column;
+
+  @media (max-width: $mobile) {
+    left: $layout_margin_mob;
+  }
+  align-items: flex-start;
+
+  p {
+    font-size: $medium_font_size;
+    line-height: 1;
+    font-style: italic;
+    text-transform: uppercase;
+
+    // Appearance animation - fade from top-left diagonal
+    opacity: 0;
+    animation: fadeFromTopLeft $text_animation ease-out forwards;
+
+    @media only screen and (max-width: $mobile) {
+      font-size: $small_small_small_font_size;
+    }
+  }
+
+  // Ornament decoration container
+  .ornament_container {
+    position: absolute;
+    top: $big_margin;
+    left: 0;
+    width: $ornament_size;
+    height: $ornament_size;
+
+    @media (max-width: $mobile) {
+      top: $margin;
+      width: $ornament_size_mob;
+      height: $ornament_size_mob;
+    }
+
+    // Colored ornament - background layer
+    .ornament_colored {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: var(--color-secondary);
+      opacity: $less_less_opacity;
+      transform: translate($ornament_offset_x, $ornament_offset_y)
+        rotate(270deg);
+      transition: color $transition_time;
+
+      // Ornament layer separation
+      animation: ornamentSeparateLeft $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+        transform: translate($ornament_offset_x_mob, $ornament_offset_y_mob)
+          rotate(270deg);
+        animation: ornamentSeparateLeftMob $text_animation ease-out forwards;
+      }
+    }
+
+    // White ornament - foreground layer
+    .ornament {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: $white_color;
+      opacity: $less_opacity;
+      transform: rotate(270deg);
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+      }
+    }
+  }
+}
+
+// ----------------------------------------
+// Right position - Element name + Kanji
+// ----------------------------------------
+.right {
+  right: $layout_margin;
+  gap: $small_margin;
+
+  @media (max-width: $mobile) {
+    gap: $small_small_margin;
+    right: $layout_margin_mob;
+  }
+
+  p {
+    font-size: $medium_font_size;
+    line-height: 1;
+
+    // Appearance animation - fade from top-right diagonal
+    opacity: 0;
+    animation: fadeFromTopRight $text_animation ease-out forwards;
+
+    @media only screen and (max-width: $mobile) {
+      font-size: $small_small_small_font_size;
+    }
+
+    &:first-child {
+      font-style: italic;
+      text-transform: uppercase;
+    }
+  }
+
+  // Ornament decoration container
+  .ornament_container_right {
+    position: absolute;
+    top: $big_margin;
+    right: 0;
+    width: $ornament_size;
+    height: $ornament_size;
+
+    @media (max-width: $mobile) {
+      top: $margin;
+      width: $ornament_size_mob;
+      height: $ornament_size_mob;
+    }
+
+    // Colored ornament - background layer
+    .ornament_colored_right {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: var(--color-secondary);
+      opacity: $less_less_opacity;
+      transform: translate(-$ornament_offset_x, $ornament_offset_y);
+      transition: color $transition_time;
+
+      // Ornament layer separation
+      animation: ornamentSeparateRight $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+        transform: translate(-$ornament_offset_x_mob, $ornament_offset_y_mob);
+        animation: ornamentSeparateRightMob $text_animation ease-out forwards;
+      }
+    }
+
+    // White ornament - foreground layer
+    .ornament_right {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: $white_color;
+      opacity: $less_opacity;
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+      }
+    }
+  }
+
+  // Element icon container - positioned below ornament
+  .element_container {
+    position: absolute;
+    top: calc($big_margin + $element_offset_y);
+    right: calc($big_margin + $element_offset_x);
+    pointer-events: none;
+
+    @media (max-width: $mobile) {
+      top: calc($margin + $element_offset_y_mob);
+      right: calc($margin + $element_offset_x_mob);
+    }
+
+    // Wipe-in wrapper for new icons
+    .element_wipe_in {
+      clip-path: inset(-#{$element_offset} -#{$element_offset} calc(100% + #{$element_offset}) -#{$element_offset});
+      animation: elementWipeIn $transition_time ease-in-out 0.02s forwards;
+    }
+
+    // Old icons overlay - wipes away top-to-bottom
+    .element_wipe_out {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      animation: elementWipeOut $transition_time ease-in-out forwards;
+
+      // Keep exit icons at their resting offset (no separation replay)
+      .element_colored,
+      .element_main {
+        animation: none;
+      }
+    }
+
+    // Colored element - background layer (inline SVG)
+    .element_colored {
+      position: absolute;
+      width: $element_size;
+      height: $element_size;
+      color: var(--color-secondary);
+      opacity: $less_less_opacity;
+      transform: translate($element_offset, -$element_offset);
+      transition: color $transition_time;
+
+      // Element layer separation
+      animation: elementColoredSeparate $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        width: $element_size_mob;
+        height: $element_size_mob;
+        transform: translate($element_offset_mob, -$element_offset_mob);
+        animation: elementColoredSeparateMob $text_animation ease-out forwards;
+      }
+    }
+
+    // White element - foreground layer (Next Image)
+    .element_main {
+      position: relative;
+      width: $element_size;
+      height: $element_size;
+      object-fit: contain;
+      opacity: $less_opacity;
+      transform: translate(-$element_offset, $element_offset);
+
+      // Element layer separation
+      animation: elementMainSeparate $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        width: $element_size_mob;
+        height: $element_size_mob;
+        transform: translate(-$element_offset_mob, $element_offset_mob);
+        animation: elementMainSeparateMob $text_animation ease-out forwards;
+      }
+    }
+
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+
+// Left corner - fade in from top-left
+@keyframes fadeFromTopLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-$text_animation_margin, -$text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+// Right corner - fade in from top-right
+@keyframes fadeFromTopRight {
+  0% {
+    opacity: 0;
+    transform: translate($text_animation_margin, -$text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+// Left ornament colored: starts at origin, separates to offset
+@keyframes ornamentSeparateLeft {
+  0% {
+    transform: translate(0, 0) rotate(270deg);
+  }
+  100% {
+    transform: translate($ornament_offset_x, $ornament_offset_y) rotate(270deg);
+  }
+}
+
+@keyframes ornamentSeparateLeftMob {
+  0% {
+    transform: translate(0, 0) rotate(270deg);
+  }
+  100% {
+    transform: translate($ornament_offset_x_mob, $ornament_offset_y_mob) rotate(270deg);
+  }
+}
+
+// Right ornament colored: starts at origin, separates to offset
+@keyframes ornamentSeparateRight {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-$ornament_offset_x, $ornament_offset_y);
+  }
+}
+
+@keyframes ornamentSeparateRightMob {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-$ornament_offset_x_mob, $ornament_offset_y_mob);
+  }
+}
+
+// Element colored icon: starts centered, separates to offset
+@keyframes elementColoredSeparate {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate($element_offset, -$element_offset);
+  }
+}
+
+@keyframes elementColoredSeparateMob {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate($element_offset_mob, -$element_offset_mob);
+  }
+}
+
+// Element main icon: starts centered, separates to offset
+@keyframes elementMainSeparate {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-$element_offset, $element_offset);
+  }
+}
+
+@keyframes elementMainSeparateMob {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-$element_offset_mob, $element_offset_mob);
+  }
+}
+
+// Element icon wipe-in: reveal from top to bottom
+// Negative inset accounts for icon offset transforms (±$element_offset)
+@keyframes elementWipeIn {
+  0% {
+    clip-path: inset(-#{$element_offset} -#{$element_offset} calc(100% + #{$element_offset}) -#{$element_offset});
+  }
+  100% {
+    clip-path: inset(-#{$element_offset});
+  }
+}
+
+// Element icon wipe-out: clip from top to bottom
+@keyframes elementWipeOut {
+  0% {
+    clip-path: inset(-#{$element_offset});
+  }
+  100% {
+    clip-path: inset(calc(100% + #{$element_offset}) -#{$element_offset} -#{$element_offset} -#{$element_offset});
+  }
+}

@@ -1,0 +1,189 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// PORTRAIT OVERLAY
+//
+// ------------------------------+
+
+// Overlay - only visible on mobile portrait
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: $black_color;
+  z-index: $z_loading + 100;
+  justify-content: center;
+  align-items: center;
+
+  // Show only on mobile portrait
+  @media only screen and (max-width: $mobile) and (orientation: portrait) {
+    display: flex;
+  }
+
+  // ----------------------------------------
+  // Header - centered at top
+  // ----------------------------------------
+  .header {
+    position: absolute;
+    top: $layout_margin;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: $title_font_size;
+  }
+
+  // ----------------------------------------
+  // Ornament base styles
+  // ----------------------------------------
+  .ornament_colored {
+    position: absolute;
+    width: $ornament_size_mob;
+    height: $ornament_size_mob;
+    color: var(--color-secondary);
+    opacity: $less_less_opacity;
+    transition: color $transition_time;
+  }
+
+  .ornament {
+    position: absolute;
+    width: $ornament_size_mob;
+    height: $ornament_size_mob;
+    color: $white_color;
+    opacity: $less_opacity;
+  }
+
+  // ----------------------------------------
+  // Top-left ornament (270deg)
+  // ----------------------------------------
+  .ornament_top_left {
+    position: absolute;
+    top: $layout_margin_mob;
+    left: $layout_margin_mob;
+    width: $ornament_size_mob;
+    height: $ornament_size_mob;
+
+    .ornament_colored {
+      transform: translate($ornament_offset_x_mob, $ornament_offset_y_mob)
+        rotate(270deg);
+    }
+
+    .ornament {
+      transform: rotate(270deg);
+    }
+  }
+
+  // ----------------------------------------
+  // Top-right ornament (0deg)
+  // ----------------------------------------
+  .ornament_top_right {
+    position: absolute;
+    top: $layout_margin_mob;
+    right: $layout_margin_mob;
+    width: $ornament_size_mob;
+    height: $ornament_size_mob;
+
+    .ornament_colored {
+      transform: translate(-$ornament_offset_x_mob, $ornament_offset_y_mob);
+    }
+
+    .ornament {
+      transform: rotate(0deg);
+    }
+  }
+
+  // ----------------------------------------
+  // Bottom-left ornament (180deg)
+  // ----------------------------------------
+  .ornament_bottom_left {
+    position: absolute;
+    bottom: $layout_margin_mob;
+    left: $layout_margin_mob;
+    width: $ornament_size_mob;
+    height: $ornament_size_mob;
+
+    .ornament_colored {
+      transform: translate($ornament_offset_x_mob, -$ornament_offset_y_mob)
+        rotate(180deg);
+    }
+
+    .ornament {
+      transform: rotate(180deg);
+    }
+  }
+
+  // ----------------------------------------
+  // Bottom-right ornament (90deg)
+  // ----------------------------------------
+  .ornament_bottom_right {
+    position: absolute;
+    bottom: $layout_margin_mob;
+    right: $layout_margin_mob;
+    width: $ornament_size_mob;
+    height: $ornament_size_mob;
+
+    .ornament_colored {
+      transform: translate(-$ornament_offset_x_mob, -$ornament_offset_y_mob)
+        rotate(90deg);
+    }
+
+    .ornament {
+      transform: rotate(90deg);
+    }
+  }
+
+  // ----------------------------------------
+  // Content
+  // ----------------------------------------
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $small_small_margin;
+    text-align: center;
+
+    // Rotate phone icon
+    .icon {
+      width: 120px;
+      height: 120px;
+      color: var(--color-primary);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    // Text
+    .text {
+      font-size: $small_font_size;
+      max-width: 280px;
+    }
+  }
+
+  // ----------------------------------------
+  // Footer - lion print centered at bottom
+  // ----------------------------------------
+  .footer {
+    position: absolute;
+    bottom: $layout_margin;
+    left: 50%;
+    transform: translateX(-50%);
+
+    img {
+      width: 24px;
+      height: auto;
+    }
+  }
+}
+
+// Pulse animation for icon
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: $less_opacity;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}

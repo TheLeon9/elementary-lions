@@ -1,0 +1,129 @@
+@use '@/styles/variables' as *;
+
+// ------------------------------+
+//
+// ELEMENT TITLE
+//
+// ------------------------------+
+
+// Container - bottom left position
+.container {
+  position: absolute;
+  bottom: $layout_margin;
+  left: $layout_margin;
+
+  @media (max-width: $mobile) {
+    bottom: $layout_margin_mob;
+    left: $layout_margin_mob;
+  }
+
+  // Title text container
+  .title_cont {
+    position: relative;
+
+    h2 {
+      font-size: $medium_font_size;
+      line-height: 1;
+      white-space: nowrap;
+
+      // Appearance animation - fade from bottom-left diagonal
+      // [TEST]
+      opacity: 0;
+      animation: fadeFromBottomLeft $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        font-size: $small_small_small_font_size;
+        white-space: normal;
+      }
+    }
+
+  }
+
+  // Ornament decoration container
+  .ornament_container {
+    position: absolute;
+    bottom: $big_margin;
+    left: 0;
+    width: $ornament_size;
+    height: $ornament_size;
+
+    @media (max-width: $mobile) {
+      bottom: $margin;
+      width: $ornament_size_mob;
+      height: $ornament_size_mob;
+    }
+
+    // Colored ornament - background layer
+    .ornament_colored {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: var(--color-secondary);
+      opacity: $less_less_opacity;
+      transform: translate($ornament_offset_x, -$ornament_offset_y)
+        rotate(180deg);
+      transition: color $transition_time;
+
+      // Ornament layer separation
+      animation: titleOrnamentSeparate $text_animation ease-out forwards;
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+        transform: translate($ornament_offset_x_mob, -$ornament_offset_y_mob)
+          rotate(180deg);
+        animation: titleOrnamentSeparateMob $text_animation ease-out forwards;
+      }
+    }
+
+    // White ornament - foreground layer
+    .ornament {
+      position: absolute;
+      width: $ornament_size;
+      height: $ornament_size;
+      color: $white_color;
+      opacity: $less_opacity;
+      transform: rotate(180deg);
+
+      @media (max-width: $mobile) {
+        width: $ornament_size_mob;
+        height: $ornament_size_mob;
+      }
+    }
+  }
+}
+
+// ==============================
+// APPEARANCE ANIMATIONS
+// ==============================
+
+// Text fade from bottom-left diagonal
+@keyframes fadeFromBottomLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-$text_animation_margin, $text_animation_margin);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+// Ornament colored layer separation
+@keyframes titleOrnamentSeparate {
+  0% {
+    transform: translate(0, 0) rotate(180deg);
+  }
+  100% {
+    transform: translate($ornament_offset_x, -$ornament_offset_y) rotate(180deg);
+  }
+}
+
+@keyframes titleOrnamentSeparateMob {
+  0% {
+    transform: translate(0, 0) rotate(180deg);
+  }
+  100% {
+    transform: translate($ornament_offset_x_mob, -$ornament_offset_y_mob) rotate(180deg);
+  }
+}
