@@ -127,7 +127,7 @@ npm run dev
 
 ## 🌐 Site URL
 
-Coming soon... 🚧 The site will be deployed shortly! 💻
+You can visit the live site at [https://elementary-lions.vercel.app//](https://elementary-lions.vercel.app//). 💻
 
 ## 🏯 License
 
