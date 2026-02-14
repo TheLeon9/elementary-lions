@@ -85,6 +85,7 @@ $dot_size_mob: 6px;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: transform $transition_time;
 
         @media (max-width: $mobile) {
           width: $rosette_size_mob;
@@ -93,6 +94,16 @@ $dot_size_mob: 6px;
 
         &:focus {
           outline: none;
+          transform: scale(1.1);
+
+          .rosette {
+            opacity: 1;
+            filter: drop-shadow(0 0 $shadow_blur var(--element-color));
+          }
+
+          .dot {
+            box-shadow: 0 0 $shadow_blur $shadow_spread var(--element-color);
+          }
         }
 
         // Rosette SVG
@@ -116,6 +127,8 @@ $dot_size_mob: 6px;
           height: $dot_size;
           border-radius: $circle_border_radius;
           background: var(--element-color);
+          box-shadow: 0 0 $shadow_blur 2px var(--element-color);
+          transition: box-shadow $transition_time;
 
           @media (max-width: $mobile) {
             width: $dot_size_mob;
@@ -140,17 +153,29 @@ $dot_size_mob: 6px;
 
         // Hover state
         &:hover {
+          transform: scale(1.1);
+
           .rosette {
             opacity: 1;
             filter: drop-shadow(0 0 $shadow_blur var(--element-color));
+          }
+
+          .dot {
+            box-shadow: 0 0 $shadow_blur $shadow_spread var(--element-color);
           }
         }
 
         // Active state
         &.active {
+          transform: scale(1.1);
+
           .rosette {
             opacity: 1;
             filter: drop-shadow(0 0 $shadow_blur var(--element-color));
+          }
+
+          .dot {
+            box-shadow: 0 0 $shadow_blur $shadow_spread var(--element-color);
           }
         }
       }

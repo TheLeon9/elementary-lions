@@ -38,8 +38,8 @@ import gsap from 'gsap';
 //                       (0 = none, 1 = fully black edges)
 
 const BLOOM_INTENSITY = 0.2;
-const BLOOM_THRESHOLD = 0.9;
-const BLOOM_SMOOTHING = 0.9;
+const BLOOM_THRESHOLD = 0.8;
+const BLOOM_SMOOTHING = 0.8;
 const CHROMATIC_ABERRATION = 0;
 const VIGNETTE_OFFSET = 0.2;
 const VIGNETTE_DARKNESS = 0.8;
@@ -52,7 +52,7 @@ const VIGNETTE_DARKNESS = 0.8;
 // speed     = oscillation frequency (lower = slower)
 // amplitude = extra intensity added at peak (e.g. 0.1 = +0.1 on top of base)
 const BLOOM_PULSE_SPEED = 0.6;
-const BLOOM_PULSE_AMPLITUDE = 0.1;
+const BLOOM_PULSE_AMPLITUDE = 0.2;
 
 // Vignette pulse - darkness oscillates above its base value
 // speed     = oscillation frequency (lower = slower)
@@ -63,15 +63,15 @@ const VIGNETTE_PULSE_AMPLITUDE = 0.2;
 // Chromatic pulse - subtle constant oscillation of the RGB shift
 // speed     = oscillation frequency (lower = slower)
 // amplitude = max extra offset added on top of base (0.00005 = barely perceptible)
-const CHROMATIC_PULSE_SPEED = 0.8;
-const CHROMATIC_PULSE_AMPLITUDE = 0.0008;
+const CHROMATIC_PULSE_SPEED = 0;
+const CHROMATIC_PULSE_AMPLITUDE = 0;
 
 // Chromatic spike - RGB shift spikes during element transitions then returns to base
 // peak     = max aberration value at the peak of the spike (0.005 = very visible)
 // duration = total spike duration in seconds (ramps up then back down)
 // ease     = easing for the ramp-down (power2.inOut = smooth return)
-const CHROMATIC_SPIKE_PEAK = 0.002;
 const CHROMATIC_SPIKE_DURATION = 0.6;
+const CHROMATIC_SPIKE_PEAK = 0.004;
 const CHROMATIC_SPIKE_EASE = 'power2.inOut';
 
 const ELEMENT_EFFECTS = {

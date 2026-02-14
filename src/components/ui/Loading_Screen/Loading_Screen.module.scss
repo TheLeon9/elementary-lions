@@ -33,7 +33,9 @@ $loading_font_size: calc($title_font_size * 2.5);
       display: flex;
       justify-content: center;
       align-items: center;
-
+      animation: kanjiGlow 2s ease-in-out infinite;
+      transition: transform $transition_time;
+      
       h2 {
         font-size: $loading_font_size;
         line-height: 1;
@@ -149,6 +151,11 @@ $overlap: $border_width;
     line {
       stroke-dasharray: 200;
       stroke-dashoffset: 0;
+      animation: linePulse 2s ease-in-out infinite;
+
+      &:nth-child(2) { animation-delay: -0.5s; }
+      &:nth-child(3) { animation-delay: -1s; }
+      &:nth-child(4) { animation-delay: -1.5s; }
     }
   }
 }
@@ -233,6 +240,22 @@ $slide_distance: 150%;
   }
   100% {
     stroke-dashoffset: -200;
+  }
+}
+
+// Lines opacity pulse
+@keyframes linePulse {
+  0%, 100% { opacity: $less_opacity; }
+  50% { opacity: 1; }
+}
+
+// Kanji scale pulse
+@keyframes kanjiGlow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
   }
 }
 

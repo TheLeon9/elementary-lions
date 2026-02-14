@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LION_STYLIZED } from '@/data/constants';
 import styles from './Loading_Screen.module.scss';
 
@@ -60,6 +60,26 @@ export default function Loading_Screen({ onLoadComplete }) {
   const [displayChar, setDisplayChar] = useState(KANJI_SEQUENCE[0]);
   const [isExiting, setIsExiting] = useState(false);
   const [startTime] = useState(Date.now());
+
+  // ----------------------------------------
+  // Gradient stops animation
+  // ----------------------------------------
+  const stopInnerRef = useRef(null);
+  const stopOuterRef = useRef(null);
+
+  useEffect(() => {
+    let rafId;
+    const animate = () => {
+      const t = (Math.sin(Date.now() * 0.00314) + 1) / 2; // 0 → 1 (2s cycle)
+      const inner = 20 + t * 20; // 20% → 40%
+      const outer = 80 - t * 20; // 80% → 60%
+      stopInnerRef.current?.setAttribute('offset', `${inner}%`);
+      stopOuterRef.current?.setAttribute('offset', `${outer}%`);
+      rafId = requestAnimationFrame(animate);
+    };
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
 
   // ----------------------------------------
   // Preload images
@@ -140,8 +160,8 @@ export default function Loading_Screen({ onLoadComplete }) {
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#f8f8ff" />
-              <stop offset="20%" stopColor="transparent" />
-              <stop offset="80%" stopColor="transparent" />
+              <stop ref={stopInnerRef} offset="20%" stopColor="transparent" />
+              <stop ref={stopOuterRef} offset="80%" stopColor="transparent" />
               <stop offset="100%" stopColor="#f8f8ff" />
             </linearGradient>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">

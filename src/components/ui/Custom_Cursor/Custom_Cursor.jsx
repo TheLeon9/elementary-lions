@@ -110,7 +110,7 @@ export default function Custom_Cursor({ isHovering }) {
   return (
     <div className={`${styles.container} ${isVisible ? styles.visible : ''}`}>
       {/* Main cursor dot */}
-      <div ref={cursorRef} className={styles.dot} />
+      <div ref={cursorRef} className={`${styles.dot} ${isHovering ? styles.hidden : ''}`} />
 
       {/* Outer ring (reacts to hover state) */}
       <div

@@ -34,10 +34,10 @@ const CROSSFADE_EASE = 'power2.inOut';
 const IMAGE_SCALE = {
   electricity: 1.2,
   fire:        1.1,
-  water:       1,
-  nature:      1,
+  water:       1.1,
+  nature:      1.1,
   wind:        1.2,
-  ice:         1,
+  ice:         1.05,
   shadow:      1.2,
 };
 
@@ -71,8 +71,8 @@ const IMAGE_TINT = '#ffffff';
 // Breathing - subtle scale oscillation (the image "breathes")
 // speed     = oscillation frequency (lower = slower, 0.8 ≈ 1 cycle every ~8s)
 // amplitude = scale variation (0.01 = ±1% size change)
-const BREATHING_SPEED = 0.8;
-const BREATHING_AMPLITUDE = 0.02;
+const BREATHING_SPEED = 0.6;
+const BREATHING_AMPLITUDE = 0.04;
 
 // Slow drift - the image wanders slightly in X/Y
 // Uses sin/cos with different speeds to create a smooth looping path
@@ -80,14 +80,14 @@ const BREATHING_AMPLITUDE = 0.02;
 // amplitude = max displacement in 3D units
 const DRIFT_SPEED_X = 0.2;
 const DRIFT_SPEED_Y = 0.2;
-const DRIFT_AMPLITUDE_X = 0.1;
-const DRIFT_AMPLITUDE_Y = 0.1;
+const DRIFT_AMPLITUDE_X = 0.15;
+const DRIFT_AMPLITUDE_Y = 0.15;
 
 // Parallax - image reacts to mouse position (inverse direction = depth feeling)
 // strength  = max shift when mouse is at screen edge (3D units)
 // smoothing = interpolation speed per frame (lower = smoother, 0 to 1)
-const PARALLAX_STRENGTH = 0.02;
-const PARALLAX_SMOOTHING = 0.02;
+const PARALLAX_STRENGTH = 0.04;
+const PARALLAX_SMOOTHING = 0.04;
 
 // ============================================
 // ENTRANCE ANIMATION

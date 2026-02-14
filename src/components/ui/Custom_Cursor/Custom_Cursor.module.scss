@@ -31,7 +31,16 @@ $ring_hover_size: 60px;
     margin: calc(-#{$dot_size} / 2);
     border-radius: $circle_border_radius;
     background: var(--color-primary);
-    box-shadow: $shadow_box;
+    box-shadow:
+      $shadow_box,
+      0 0 $shadow_blur $shadow_spread var(--color-primary);
+    opacity: 1;
+    transition: opacity $transition_time;
+    z-index: 1;
+
+    &.hidden {
+      opacity: 0;
+    }
   }
 
   // Cursor ring
@@ -41,15 +50,19 @@ $ring_hover_size: 60px;
     height: $ring_size;
     margin: calc(-#{$ring_size} / 2);
     border-radius: $circle_border_radius;
-    border: $border_width solid var(--color-primary);
+    border: $border_width_big solid var(--color-primary);
+    box-shadow: 0 0 $shadow_blur $shadow_spread var(--color-primary);
+    background-color: rgba($black_color, $less_less_opacity);
     opacity: $less_opacity;
+    z-index: 0;
 
     transition:
       width $transition_time,
       height $transition_time,
       margin $transition_time,
       opacity $transition_time,
-      border-width $transition_time;
+      border-width $transition_time,
+      background-color $transition_time;
 
     &.hovering {
       width: $ring_hover_size;
@@ -58,6 +71,7 @@ $ring_hover_size: 60px;
       opacity: 1;
       border-width: $border_width_big;
       box-shadow: $shadow_box;
+      background-color: transparent;
     }
   }
 }
