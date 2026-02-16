@@ -11,10 +11,10 @@ import styles from './Corner_Text.module.scss';
 // ----------------------------------------
 // Scramble animation constants
 // ----------------------------------------
-const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const SCRAMBLE_COUNT = 15;
-const SCRAMBLE_SPEED = 40;
-const TRANSLATION_INTERVAL = 2500;
+const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Character pool for scramble effect
+const SCRAMBLE_COUNT = 15; // Number of scramble iterations before reveal
+const SCRAMBLE_SPEED = 40; // Delay between each scramble step (ms)
+const TRANSLATION_INTERVAL = 1800; // Time between word changes (ms)
 
 // ----------------------------------------
 // Ornament SVG Component

@@ -1,6 +1,10 @@
 'use client';
 
+// === IMPORTS ===
+
 import { useState, useCallback } from 'react';
+
+// === HOOK ===
 
 export default function useCursor() {
   const [isHovering, setIsHovering] = useState(false);

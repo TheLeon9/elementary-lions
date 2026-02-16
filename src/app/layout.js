@@ -1,4 +1,8 @@
+// === IMPORTS ===
+
 import '@/styles/globals.scss';
+
+// === METADATA ===
 
 export const metadata = {
   title: 'Elemental Lions - Guardians of the Elements',
@@ -15,8 +19,8 @@ export const metadata = {
   ],
   authors: [{ name: 'TheLeon' }],
   icons: {
-    icon: [{ url: '/img/decoration/lion_print.svg', type: 'image/svg+xml' }],
-    apple: '/img/decoration/lion_print.svg',
+    icon: [{ url: '/img/logo/lion_print.png', type: 'image/png' }],
+    apple: '/img/logo/lion_print.png',
   },
   openGraph: {
     title: 'Elemental Lions',
@@ -25,12 +29,16 @@ export const metadata = {
   },
 };
 
+// === VIEWPORT ===
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
 };
+
+// === COMPONENT ===
 
 export default function RootLayout({ children }) {
   return (

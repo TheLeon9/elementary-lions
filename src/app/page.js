@@ -90,6 +90,8 @@ function HomeContent() {
   );
 }
 
+// === PAGE ===
+
 export default function Home() {
   return (
     <ThemeProvider>

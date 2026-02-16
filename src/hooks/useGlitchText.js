@@ -1,18 +1,18 @@
+// === IMPORTS ===
+
 import { useState, useEffect, useRef } from 'react';
 
-// ----------------------------------------
-// Glitch text scramble hook
-// Scrambles text during element transitions,
-// then progressively reveals the new text
-// ----------------------------------------
+// === CONSTANTS ===
 
-const UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz';
-const CJK_CHARS = '獅龍虎鬼神風火雷水土氷影自然';
+const UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Uppercase pool for scramble
+const LOWER_CHARS = 'abcdefghijklmnopqrstuvwxyz'; // Lowercase pool for scramble
+const CJK_CHARS = '獅龍虎鬼神風火雷水土氷影自然'; // Kanji pool for scramble
 
-const SCRAMBLE_SPEED = 50;
-const REVEAL_SPEED = 40;
-const REVEAL_STEPS = 8;
+const SCRAMBLE_SPEED = 50; // Delay between scramble ticks (ms)
+const REVEAL_SPEED = 40; // Delay between reveal steps (ms)
+const REVEAL_STEPS = 8; // Number of steps to fully reveal text
+
+// === HELPERS ===
 
 function randomFrom(str) {
   return str[Math.floor(Math.random() * str.length)];
@@ -32,6 +32,8 @@ function isScrambleable(char) {
 function scrambleText(text) {
   return [...text].map(scrambleChar).join('');
 }
+
+// === HOOK ===
 
 export function useGlitchText(text, isTransitioning) {
   const [displayText, setDisplayText] = useState(text);

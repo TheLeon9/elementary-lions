@@ -81,6 +81,8 @@ export function ThemeProvider({ children }) {
   );
 }
 
+// === HOOK ===
+
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
