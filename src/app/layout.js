@@ -1,6 +1,15 @@
 // === IMPORTS ===
 
+import { Nunito } from 'next/font/google';
 import '@/styles/globals.scss';
+
+// === FONT ===
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  display: 'swap',
+});
 
 // === METADATA ===
 
@@ -42,7 +51,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={nunito.className}>
       <body>{children}</body>
     </html>
   );

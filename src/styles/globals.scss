@@ -2,11 +2,6 @@
 @use '@/styles/variables' as *;
 
 // ============================
-// GOOGLE FONTS
-// ============================
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap');
-
-// ============================
 // RESET & BASE STYLES
 // ============================
 *,
@@ -31,14 +26,12 @@ body {
 
 h1,
 h2 {
-  font-family: $first_font;
   color: $white_color;
   transition: color $transition_time;
   font-weight: $font_weight_bold;
 }
 
 p {
-  font-family: $first_font;
   font-weight: $font_weight_regular;
   color: $white_color;
   transition: color $transition_time;
