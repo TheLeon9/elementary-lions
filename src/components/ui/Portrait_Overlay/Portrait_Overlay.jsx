@@ -88,7 +88,7 @@ export default function Portrait_Overlay() {
   return (
     <div className={styles.overlay}>
       {/* Header text */}
-      <h1 className={styles.header}>{LION_STYLIZED.japanese_modern}</h1>
+      <h2 className={styles.header}>{LION_STYLIZED.japanese_modern}</h2>
 
       {/* Top-left ornament */}
       <div className={styles.ornament_top_left}>
