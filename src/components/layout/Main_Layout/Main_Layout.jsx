@@ -1,5 +1,7 @@
 'use client';
 
+// === IMPORTS ===
+
 import styles from './Main_Layout.module.scss';
 
 // ----------------------------------------
@@ -12,8 +14,6 @@ export default function Main_Layout({ children }) {
   // ----------------------------------------
   return (
     <div className={styles.global_container}>
-      {/* Elemental Layout */}
-      <div className={styles.elemental_layout}></div>
       {/* Children - Others Elements */}
       {children}
     </div>
