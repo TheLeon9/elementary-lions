@@ -54,7 +54,7 @@ const IMAGES_TO_PRELOAD = [
 // ----------------------------------------
 // Loading_Screen Component
 // ----------------------------------------
-export default function Loading_Screen({ onLoadComplete }) {
+export default function Loading_Screen({ onLoadComplete, onExitStart }) {
   const [progress, setProgress] = useState(0);
   const [kanjiIndex, setKanjiIndex] = useState(0);
   const [displayChar, setDisplayChar] = useState(KANJI_SEQUENCE[0]);
@@ -101,6 +101,7 @@ export default function Loading_Screen({ onLoadComplete }) {
 
           setTimeout(() => {
             setIsExiting(true);
+            onExitStart?.();
             // Wait for exit animation: panels start at 0.3s + stagger 0.4s + slide 0.5s = ~1.2s
             setTimeout(onLoadComplete, 1200);
           }, remainingTime);

@@ -43,7 +43,7 @@ const PARTICLE_Z_OFFSET = 2;
 // delay    = seconds before fade-in starts (match with Lion_Image ENTRANCE_DELAY)
 // duration = fade-in duration in seconds
 // ease     = GSAP easing curve
-const ENTRANCE_DELAY = 4;
+const ENTRANCE_DELAY = 1;
 const ENTRANCE_DURATION = 2;
 const ENTRANCE_EASE = 'power2.out';
 
@@ -60,7 +60,7 @@ const ENTRANCE_EASE = 'power2.out';
 // AdditiveBlending makes particles glow softly against dark backgrounds
 // (their color adds to whatever is behind them instead of replacing it).
 
-export default function Particles({ element }) {
+export default function Particles({ element, isLoading }) {
   const pointsRef = useRef();
 
   // Entrance animation: opacity animated by GSAP from 0 → target
@@ -84,17 +84,19 @@ export default function Particles({ element }) {
   }, [element]);
 
   // --------------------------------------------------------
-  // ENTRANCE ANIMATION (runs once on mount)
+  // ENTRANCE ANIMATION (triggered when loading completes)
   // --------------------------------------------------------
-  // After ENTRANCE_DELAY, GSAP fades particles from 0 → PARTICLE_OPACITY.
+  // When isLoading flips to false, GSAP fades particles from 0 → PARTICLE_OPACITY.
   useEffect(() => {
-    gsap.to(entranceRef.current, {
-      opacity: PARTICLE_OPACITY,
-      delay: ENTRANCE_DELAY,
-      duration: ENTRANCE_DURATION,
-      ease: ENTRANCE_EASE,
-    });
-  }, []);
+    if (!isLoading) {
+      gsap.to(entranceRef.current, {
+        opacity: PARTICLE_OPACITY,
+        delay: ENTRANCE_DELAY,
+        duration: ENTRANCE_DURATION,
+        ease: ENTRANCE_EASE,
+      });
+    }
+  }, [isLoading]);
 
   // --------------------------------------------------------
   // ANIMATION LOOP (60fps)

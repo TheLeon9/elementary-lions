@@ -18,6 +18,7 @@ const ThemeContext = createContext(null);
 export function ThemeProvider({ children }) {
   // State
   const [isLoading, setIsLoading] = useState(true);
+  const [isSlashing, setIsSlashing] = useState(false);
   const [currentElement, setCurrentElement] = useState(DEFAULT_ELEMENT);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const transitionTimeoutRef = useRef(null);
@@ -68,11 +69,13 @@ export function ThemeProvider({ children }) {
   const value = useMemo(() => ({
     isLoading,
     setIsLoading,
+    isSlashing,
+    setIsSlashing,
     currentElement,
     element,
     isTransitioning,
     changeElement,
-  }), [isLoading, currentElement, element, isTransitioning, changeElement]);
+  }), [isLoading, isSlashing, currentElement, element, isTransitioning, changeElement]);
 
   return (
     <ThemeContext.Provider value={value}>

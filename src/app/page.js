@@ -32,10 +32,14 @@ const Lion_Scene = dynamic(
 
 function HomeContent() {
   // State
-  const { isLoading, setIsLoading } = useTheme();
+  const { isLoading, setIsLoading, setIsSlashing } = useTheme();
   const { isHovering, handleHoverChange } = useCursor();
 
   // Handlers
+  const handleExitStart = () => {
+    setIsSlashing(true);
+  };
+
   const handleLoadComplete = () => {
     setIsLoading(false);
   };
@@ -54,7 +58,7 @@ function HomeContent() {
 
       {isLoading ? (
         /* Loader */
-        <Loading_Screen onLoadComplete={handleLoadComplete} />
+        <Loading_Screen onLoadComplete={handleLoadComplete} onExitStart={handleExitStart} />
       ) : (
         /* Main Layout - mounts after loading, triggering CSS animations */
         <Main_Layout>

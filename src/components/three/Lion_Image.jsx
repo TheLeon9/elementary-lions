@@ -100,7 +100,7 @@ const PARALLAX_SMOOTHING = 0.04;
 // duration = animation duration in seconds
 // ease     = GSAP easing curve
 const ENTRANCE_START_Z = 2;
-const ENTRANCE_DELAY = 3;
+const ENTRANCE_DELAY = 0;
 const ENTRANCE_DURATION = 2;
 const ENTRANCE_EASE = 'power2.out';
 
@@ -127,7 +127,7 @@ const NEXT_MESH_Z_OFFSET = 0;
 //   2. GSAP animates: current opacity 1→0, next opacity 0→1
 //   3. When done, "next" becomes "current" and the 2nd mesh is removed
 
-export default function Lion_Image({ element }) {
+export default function Lion_Image({ element, isSlashing }) {
   // References to both 3D meshes (to update their opacity each frame)
   const meshRef = useRef();
   const secondMeshRef = useRef();
@@ -163,18 +163,21 @@ export default function Lion_Image({ element }) {
   }, []);
 
   // --------------------------------------------------------
-  // ENTRANCE ANIMATION (runs once on mount)
+  // ENTRANCE ANIMATION (triggered when loading screen slashes)
   // --------------------------------------------------------
-  // After ENTRANCE_DELAY, GSAP slides the Z offset from ENTRANCE_START_Z → 0.
-  // The plane appears to "pull back" from the camera to its resting position.
+  // When isSlashing flips to true (panels start sliding away),
+  // GSAP slides the Z offset from ENTRANCE_START_Z → 0.
+  // The plane appears to "pull back" from the camera as the panels reveal it.
   useEffect(() => {
-    gsap.to(entranceRef.current, {
-      z: 0,
-      delay: ENTRANCE_DELAY,
-      duration: ENTRANCE_DURATION,
-      ease: ENTRANCE_EASE,
-    });
-  }, []);
+    if (isSlashing) {
+      gsap.to(entranceRef.current, {
+        z: 0,
+        delay: ENTRANCE_DELAY,
+        duration: ENTRANCE_DURATION,
+        ease: ENTRANCE_EASE,
+      });
+    }
+  }, [isSlashing]);
 
   // --------------------------------------------------------
   // TRANSITION STATE

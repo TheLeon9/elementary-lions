@@ -42,7 +42,7 @@ const BG_COLOR = '#040b12';
 //   </Canvas>
 
 export default function Lion_Scene() {
-  const { currentElement } = useTheme();
+  const { currentElement, isLoading, isSlashing } = useTheme();
 
   return (
     // Fullscreen div fixed behind HTML content (low z-index)
@@ -65,10 +65,10 @@ export default function Lion_Scene() {
         {/* Suspense: renders nothing (null) while textures are loading */}
         <Suspense fallback={null}>
           {/* Lion image - fullscreen 2D plane with crossfade between elements */}
-          <Lion_Image element={currentElement} />
+          <Lion_Image element={currentElement} isSlashing={isSlashing} />
 
           {/* Floating particles - subtle dots drifting upward, colored per element */}
-          <Particles element={currentElement} />
+          <Particles element={currentElement} isLoading={isLoading} />
 
           {/* Post-processing - filters applied on top of the rendered image */}
           <Post_Processing element={currentElement} />
