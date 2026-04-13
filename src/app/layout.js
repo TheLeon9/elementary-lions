@@ -7,7 +7,7 @@ import '@/styles/globals.scss';
 
 const nunito = Nunito({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['400', '600'],
   display: 'swap',
 });
 
@@ -43,8 +43,6 @@ export const metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 // === COMPONENT ===

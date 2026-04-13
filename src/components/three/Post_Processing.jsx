@@ -16,7 +16,7 @@ import {
 } from '@react-three/postprocessing';
 // BlendFunction = how the effect blends with the image
 import { BlendFunction } from 'postprocessing';
-import * as THREE from 'three';
+import { Vector2 } from 'three';
 // gsap = animation library, used here to animate the chromatic spike on transition
 import gsap from 'gsap';
 
@@ -142,7 +142,7 @@ export default function Post_Processing({ element }) {
   // Recomputed by the throttled useFrame via pulse.chromatic.
   const chromaticOffset = useMemo(() => {
     const total = effects.chromaticAberration + pulse.chromatic;
-    return new THREE.Vector2(total, total);
+    return new Vector2(total, total);
   }, [effects.chromaticAberration, pulse.chromatic]);
 
   // --------------------------------------------------------

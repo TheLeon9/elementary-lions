@@ -6,7 +6,7 @@ import { useRef, useMemo, useEffect, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 // useTexture = loads images and converts them to GPU textures (usable on 3D meshes)
 import { useTexture } from '@react-three/drei';
-import * as THREE from 'three';
+import { SRGBColorSpace, DoubleSide } from 'three';
 // gsap = animation library, used here to animate the crossfade opacity
 import gsap from 'gsap';
 
@@ -205,7 +205,7 @@ export default function Lion_Image({ element, isSlashing }) {
     Object.keys(IMAGE_MAP).forEach((key, index) => {
       // SRGBColorSpace = colors display like in Photoshop
       // (without this, colors would look darker/washed out)
-      textures[index].colorSpace = THREE.SRGBColorSpace;
+      textures[index].colorSpace = SRGBColorSpace;
       map[key] = textures[index];
     });
     return map;
@@ -362,7 +362,7 @@ export default function Lion_Image({ element, isSlashing }) {
           color={IMAGE_TINT}
           transparent
           opacity={1}
-          side={THREE.DoubleSide}
+          side={DoubleSide}
           depthWrite={false}
         />
       </mesh>
@@ -377,7 +377,7 @@ export default function Lion_Image({ element, isSlashing }) {
             color={IMAGE_TINT}
             transparent
             opacity={0}
-            side={THREE.DoubleSide}
+            side={DoubleSide}
             depthWrite={false}
           />
         </mesh>

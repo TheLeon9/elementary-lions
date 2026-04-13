@@ -2,7 +2,7 @@
 
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { Color, AdditiveBlending } from 'three';
 import gsap from 'gsap';
 import { ELEMENTS } from '@/data/constants';
 
@@ -80,7 +80,7 @@ export default function Particles({ element, isLoading }) {
 
   // Get the element's "third" color for particle tint
   const color = useMemo(() => {
-    return new THREE.Color(ELEMENTS[element]?.colors.third || '#ffffff');
+    return new Color(ELEMENTS[element]?.colors.third || '#ffffff');
   }, [element]);
 
   // --------------------------------------------------------
@@ -147,7 +147,7 @@ export default function Particles({ element, isLoading }) {
         transparent
         depthWrite={false}
         sizeAttenuation           // Distant particles appear smaller (perspective)
-        blending={THREE.AdditiveBlending} // Glow effect: particle color adds to background
+        blending={AdditiveBlending} // Glow effect: particle color adds to background
       />
     </points>
   );
